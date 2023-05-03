@@ -1,5 +1,6 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
+import 'package:weather_app/widgets/dialogs.dart';
 
 class GlobalController extends GetxController {
   final RxBool _isLoading = true.obs;
