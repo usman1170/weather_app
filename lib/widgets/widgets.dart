@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:weather_app/models/current_weather_data.dart';
 
 import '../controller/global_controllar.dart';
 
@@ -38,7 +39,7 @@ class _HeaderContainerState extends State<HeaderContainer> {
     setState(() {
       locality = place.locality!;
 
-      city = place.subAdministrativeArea!;
+      city = place.subAdministrativeArea ?? "Loading...";
       // if (place.subLocality == '') {
       //   city = place.locality!;
       // } else {
@@ -80,14 +81,15 @@ class _HeaderContainerState extends State<HeaderContainer> {
                   ),
                 ],
               ),
-              Text(
-                locality,
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w400,
+              if (locality != "")
+                Text(
+                  locality,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
-              ),
             ],
           ),
           InkWell(
@@ -104,92 +106,20 @@ class _HeaderContainerState extends State<HeaderContainer> {
   }
 }
 
-class RowLowerContainer extends StatelessWidget {
-  const RowLowerContainer({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height * .32,
-      width: MediaQuery.of(context).size.width * .38,
-      decoration: BoxDecoration(
-        color: Colors.blue.shade100.withOpacity(.4),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(20),
-        ),
-      ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Air\nQuality.",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.white,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    top: 14,
-                    right: MediaQuery.of(context).size.width * .2,
-                    bottom: 14,
-                  ),
-                  child: Text(
-                    "54",
-                    style: TextStyle(
-                      fontSize: 30,
-                      color: Colors.orange.shade100,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-                const Text(
-                  "moderate\n",
-                  style: TextStyle(
-                    fontSize: 17,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 10),
-              child: Divider(
-                color: Colors.white,
-                thickness: 1.2,
-                endIndent: 40,
-                indent: 40,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
 class RowUpperContainer extends StatelessWidget {
+  final CurrentWeatherData currentWeatherData;
   const RowUpperContainer({
     super.key,
-    required this.temp,
+    required this.currentWeatherData,
   });
-  final String temp;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: MediaQuery.of(context).size.width * .04,
-        vertical: MediaQuery.of(context).size.height * .01,
+        vertical: MediaQuery.of(context).size.height * .022,
       ),
-      height: MediaQuery.of(context).size.height * .15,
       width: MediaQuery.of(context).size.width * .38,
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -222,10 +152,12 @@ class RowUpperContainer extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(
                     top: 8,
-                    right: 25,
+                    right: 8,
                   ),
                   child: Text(
-                    "$temp 'C",
+                    "${currentWeatherData.current.temp! - 273} °C",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
                       fontSize: 27,
                       color: Colors.white,
@@ -251,17 +183,92 @@ class RowUpperContainer extends StatelessWidget {
   }
 }
 
-class MainLongContainer extends StatefulWidget {
-  const MainLongContainer({
+class RowLowerContainer extends StatelessWidget {
+  final CurrentWeatherData currentWeatherData;
+  const RowLowerContainer({
     super.key,
+    required this.currentWeatherData,
   });
 
   @override
-  State<MainLongContainer> createState() => _MainLongContainerState();
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: MediaQuery.of(context).size.width * .02,
+        vertical: MediaQuery.of(context).size.height * .022,
+      ),
+      width: MediaQuery.of(context).size.width * .38,
+      decoration: BoxDecoration(
+        color: Colors.blue.shade100.withOpacity(.4),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(20),
+        ),
+      ),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  "Feels\nLike.",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.white,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 14,
+                    right: 8,
+                    bottom: 14,
+                  ),
+                  child: Text(
+                    // currentWeatherData.current.feelsLike
+                    "${currentWeatherData.current.feelsLike! - 273} °C",
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.orange.shade100,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                const Text(
+                  "moderate\n",
+                  style: TextStyle(
+                    fontSize: 17,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 10),
+              child: Divider(
+                color: Colors.white,
+                thickness: 1.2,
+                endIndent: 40,
+                indent: 40,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
-class _MainLongContainerState extends State<MainLongContainer> {
+class MainLongContainer extends StatelessWidget {
+  final CurrentWeatherData currentWeatherData;
+  MainLongContainer({
+    super.key,
+    required this.currentWeatherData,
+  });
+
   String date = DateFormat("yMMMMd").format(DateTime.now());
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -269,7 +276,6 @@ class _MainLongContainerState extends State<MainLongContainer> {
         horizontal: MediaQuery.of(context).size.width * .04,
         vertical: MediaQuery.of(context).size.height * .02,
       ),
-      height: MediaQuery.of(context).size.height * .5,
       width: MediaQuery.of(context).size.width * .43,
       decoration: BoxDecoration(
         color: Colors.blue.shade200.withOpacity(.4),
@@ -295,16 +301,16 @@ class _MainLongContainerState extends State<MainLongContainer> {
                 height: MediaQuery.of(context).size.height * .04,
                 width: MediaQuery.of(context).size.width * .08,
                 child: Image.asset(
-                  "assets/weather/02d.png",
+                  "assets/weather/${currentWeatherData.current.weather![0].icon}.png",
                 ),
               ),
             ],
           ),
-          const Padding(
-            padding: EdgeInsets.only(bottom: 12, left: 10, top: 4),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 12, left: 10, top: 4),
             child: Text(
-              "Sunny",
-              style: TextStyle(
+              "${currentWeatherData.current.weather![0].main}",
+              style: const TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.w600,
                 color: Colors.white,
@@ -329,11 +335,11 @@ class _MainLongContainerState extends State<MainLongContainer> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     //
                     // for Wind
                     //
-                    Text(
+                    const Text(
                       "wind",
                       style: TextStyle(
                         fontSize: 15,
@@ -341,14 +347,14 @@ class _MainLongContainerState extends State<MainLongContainer> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(
+                      padding: const EdgeInsets.only(
                         top: 4,
                         bottom: 18,
                       ),
                       child: Text(
-                        "54 km/h",
-                        style: TextStyle(
-                          fontSize: 22,
+                        "${currentWeatherData.current.windSpeed} km/h",
+                        style: const TextStyle(
+                          fontSize: 21,
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
                         ),
@@ -357,7 +363,7 @@ class _MainLongContainerState extends State<MainLongContainer> {
                     //
                     // for Humidity
                     //
-                    Text(
+                    const Text(
                       "Humidity",
                       style: TextStyle(
                         fontSize: 15,
@@ -365,13 +371,13 @@ class _MainLongContainerState extends State<MainLongContainer> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(
+                      padding: const EdgeInsets.only(
                         top: 4,
                         bottom: 18,
                       ),
                       child: Text(
-                        "55 %",
-                        style: TextStyle(
+                        "${currentWeatherData.current.humidity}",
+                        style: const TextStyle(
                           fontSize: 22,
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
@@ -381,7 +387,7 @@ class _MainLongContainerState extends State<MainLongContainer> {
                     //
                     // for Pressure
                     //
-                    Text(
+                    const Text(
                       "Pressure",
                       style: TextStyle(
                         fontSize: 15,
@@ -389,13 +395,13 @@ class _MainLongContainerState extends State<MainLongContainer> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(
+                      padding: const EdgeInsets.only(
                         top: 4,
                       ),
                       child: Text(
-                        "1002 pa",
-                        style: TextStyle(
-                          fontSize: 22,
+                        "${currentWeatherData.current.pressure} pa",
+                        style: const TextStyle(
+                          fontSize: 21,
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
                         ),
