@@ -16,44 +16,11 @@ class Dialogs {
     BuildContext context,
   ) {
     showDialog(
-        context: context,
-        builder: (_) => const Center(
-              child: CircularProgressIndicator(
-                strokeWidth: 2,
-              ),
-            ));
-  }
-
-  static void errorDialog(
-    BuildContext context,
-    String title,
-    String massage,
-  ) {
-    showDialog(
       context: context,
-      builder: (context) => SimpleDialog(
-        title: Text(title),
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 25,
-              right: 20,
-              bottom: 12,
-            ),
-            child: Text(
-              massage,
-              style: const TextStyle(
-                fontSize: 16,
-              ),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: const Text('Ok'),
-          )
-        ],
+      builder: (_) => const Center(
+        child: CircularProgressIndicator(
+          strokeWidth: 2,
+        ),
       ),
     );
   }

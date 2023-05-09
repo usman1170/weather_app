@@ -1,9 +1,10 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_app/models/current_weather_data.dart';
-
 import '../controller/global_controllar.dart';
 
 class HeaderContainer extends StatefulWidget {
@@ -35,16 +36,9 @@ class _HeaderContainerState extends State<HeaderContainer> {
   getAddress(lat, long) async {
     List<Placemark> placemark = await placemarkFromCoordinates(lat, long);
     Placemark place = placemark[0];
-    print(placemark);
     setState(() {
       locality = place.locality!;
-
       city = place.subAdministrativeArea ?? "Loading...";
-      // if (place.subLocality == '') {
-      //   city = place.locality!;
-      // } else {
-      //   city = place.subLocality!;
-      // }
     });
   }
 

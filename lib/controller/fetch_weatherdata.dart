@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:weather_app/controller/global_controllar.dart';
 import 'package:weather_app/models/current_weather_data.dart';
-import 'package:weather_app/models/daily_weather_data.dart';
 import 'package:weather_app/models/hourly_weather_data.dart';
 import 'package:weather_app/models/weather_data.dart';
 import 'package:http/http.dart' as http;

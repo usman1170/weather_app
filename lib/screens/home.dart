@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:weather_app/controller/global_controllar.dart';
-import 'package:weather_app/models/hourly_weather_data.dart';
 import 'package:weather_app/widgets/comfortlevel.dart';
-import 'package:weather_app/widgets/dailydata.dart';
 
 import '../widgets/hourlydata.dart';
 import '../widgets/widgets.dart';
@@ -186,45 +183,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 .getWeatherValues()
                                 .getCurrentWeatherData(),
                           ),
-                          // SizedBox(
-                          //   height: MediaQuery.of(context).size.height * .02,
-                          // ),
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          //   children: const [
-                          //     Padding(
-                          //       padding: EdgeInsets.only(left: 8),
-                          //       child: Text(
-                          //         "This week :",
-                          //         style: TextStyle(
-                          //           fontSize: 14,
-                          //           color: Colors.white,
-                          //           fontWeight: FontWeight.w500,
-                          //         ),
-                          //       ),
-                          //     ),
-                          //     Padding(
-                          //       padding: EdgeInsets.only(right: 14),
-                          //       child: Text(
-                          //         "View all",
-                          //         style: TextStyle(
-                          //           fontSize: 14,
-                          //           color: Colors.white,
-                          //           fontWeight: FontWeight.w500,
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   ],
-                          // ),
-
-                          // SizedBox(
-                          //   height: MediaQuery.of(context).size.height * .015,
-                          // ),
-                          // DailyDetails(
-                          //   hourlyWeatherData: _globalController
-                          //       .getWeatherValues()
-                          //       .getHourlyWeatherData(),
-                          // ),
                         ],
                       )
                     ],
