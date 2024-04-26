@@ -5,15 +5,13 @@ import 'package:weather_app/screens/splash.dart';
 void main() {
   runApp(const MyApp());
 }
-// api
-//
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Weather',
+      title: 'Weather App',
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),

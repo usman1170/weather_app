@@ -282,18 +282,18 @@ class MainLongContainer extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Text(
                 date,
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 14,
+                  fontSize: 13,
                 ),
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * .04,
-                width: MediaQuery.of(context).size.width * .08,
+                width: MediaQuery.of(context).size.width * .065,
                 child: Image.asset(
                   "assets/weather/${currentWeatherData.current.weather![0].icon}.png",
                 ),

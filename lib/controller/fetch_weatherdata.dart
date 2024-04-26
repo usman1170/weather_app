@@ -27,6 +27,6 @@ class FetchWeather {
 String apiUrl(var lat, var lon) {
   String url;
   url =
-      "https://api.openweathermap.org/data/3.0/onecall?lat=$lat&lon=$lon&appid=$apiKey&units=matric&exclude=minutely";
+      "https://api.openweathermap.org/data/3.0/onecall?lat=$lat&lon=$lon&appid=$newKey&units=matric&exclude=minutely";
   return url;
 }

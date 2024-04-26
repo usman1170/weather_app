@@ -1,5 +1,4 @@
 // ignore_for_file: library_private_types_in_public_api
-
 import 'dart:async';
 
 import 'package:animate_do/animate_do.dart';
@@ -52,6 +51,18 @@ class _SplashScreenState extends State<SplashScreen> {
                   width: 120,
                   child: Image.asset("assets/weather/02d.png"),
                 ),
+                const SizedBox(
+                  height: 18,
+                ),
+                const Text(
+                  "Weather App",
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    letterSpacing: .7,
+                    fontWeight: FontWeight.w600,
+                  ),
+                )
               ],
             ),
           ),
@@ -61,7 +72,7 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Padding(
           padding: const EdgeInsets.only(bottom: 10),
           child: Container(
-            height: 55,
+            height: 52,
             width: MediaQuery.of(context).size.width - 30,
             decoration: BoxDecoration(
                 color: Colors.blue.shade200,
@@ -73,17 +84,19 @@ class _SplashScreenState extends State<SplashScreen> {
                   TextSpan(
                     children: [
                       TextSpan(
-                        text: "Usman Ghani ",
+                        text: "Powered by ",
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 16,
                           color: Colors.white,
+                          letterSpacing: .6,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                       TextSpan(
-                        text: "®",
+                        text: "SyncEX",
                         style: TextStyle(
-                          fontSize: 26,
+                          fontSize: 18,
+                          letterSpacing: .6,
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
                         ),

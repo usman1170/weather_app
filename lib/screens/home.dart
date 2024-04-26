@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:weather_app/controller/global_controllar.dart';
-import 'package:weather_app/widgets/comfortlevel.dart';
-
 import '../widgets/hourlydata.dart';
 import '../widgets/widgets.dart';
 
@@ -19,6 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
     GlobalController(),
     permanent: true,
   );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,7 +93,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           //
                           // Header container
                           //
-                          const HeaderContainer(),
+                          InkWell(
+                            onTap: () {},
+                            child: const HeaderContainer(),
+                          ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * .014,
                           ),
@@ -140,9 +142,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           SizedBox(
                             height: MediaQuery.of(context).size.height * .02,
                           ),
-                          Row(
+                          const Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: const [
+                            children: [
                               Padding(
                                 padding: EdgeInsets.only(left: 8),
                                 child: Text(
@@ -155,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(right: 14),
+                                padding: EdgeInsets.only(right: 20),
                                 child: Text(
                                   "View details",
                                   style: TextStyle(
@@ -178,11 +180,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           SizedBox(
                             height: MediaQuery.of(context).size.height * .015,
                           ),
-                          ComfortLevel(
-                            currentWeatherData: _globalController
-                                .getWeatherValues()
-                                .getCurrentWeatherData(),
-                          ),
+                          // ComfortLevel(
+                          //   currentWeatherData: _globalController
+                          //       .getWeatherValues()
+                          //       .getCurrentWeatherData(),
+                          // ),
                         ],
                       )
                     ],
