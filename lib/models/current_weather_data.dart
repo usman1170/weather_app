@@ -15,17 +15,23 @@ class Weather {
   String? main;
   String? description;
   String? icon;
+  int? sunrise;
+  int? sunset;
 
   Weather({
     this.id,
     this.main,
     this.description,
     this.icon,
+    this.sunrise,
+    this.sunset,
   });
 
   factory Weather.fromJson(Map<String, dynamic> json) => Weather(
         id: json['id'] as int?,
         main: json['main'] as String?,
+        sunrise: json["sunrise"] as int?,
+        sunset: json["sunset"] as int?,
         description: json['description'] as String?,
         icon: json['icon'] as String?,
       );
@@ -33,6 +39,8 @@ class Weather {
   Map<String, dynamic> toJson() => {
         "id": id,
         "main": main,
+        "sunrise": sunrise,
+        "sunset": sunset,
         "description": description,
         "icon": icon,
       };

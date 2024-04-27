@@ -5,7 +5,7 @@ import 'package:weather_app/models/hourly_weather_data.dart';
 class WeatherData {
   final CurrentWeatherData? current;
   final HourlyWeatherData? hourly;
-  final DailyWeatherData? daily;
+  final WeatherDataDaily? daily;
 
   WeatherData([
     this.current,
@@ -14,5 +14,5 @@ class WeatherData {
   ]);
   CurrentWeatherData getCurrentWeatherData() => current!;
   HourlyWeatherData getHourlyWeatherData() => hourly!;
-  DailyWeatherData getdailyWeatherData() => daily!;
+  WeatherDataDaily getdailyWeatherData() => daily!;
 }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:weather_app/controller/global_controllar.dart';
+import 'package:weather_app/widgets/comfortlevel.dart';
+import 'package:weather_app/widgets/dailydata.dart';
 import '../widgets/hourlydata.dart';
 import '../widgets/widgets.dart';
 
@@ -93,9 +95,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           //
                           // Header container
                           //
-                          InkWell(
-                            onTap: () {},
-                            child: const HeaderContainer(),
+                          HeaderContainer(
+                            theme: () {},
+                            location: () {},
                           ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * .014,
@@ -180,11 +182,19 @@ class _HomeScreenState extends State<HomeScreen> {
                           SizedBox(
                             height: MediaQuery.of(context).size.height * .015,
                           ),
-                          // ComfortLevel(
-                          //   currentWeatherData: _globalController
-                          //       .getWeatherValues()
-                          //       .getCurrentWeatherData(),
-                          // ),
+                          DailyDataForecast(
+                            weatherDataDaily: _globalController
+                                .getWeatherValues()
+                                .getdailyWeatherData(),
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * .015,
+                          ),
+                          ComfortLevel(
+                            currentWeatherData: _globalController
+                                .getWeatherValues()
+                                .getCurrentWeatherData(),
+                          ),
                         ],
                       )
                     ],

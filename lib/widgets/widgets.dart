@@ -10,8 +10,11 @@ import '../controller/global_controllar.dart';
 class HeaderContainer extends StatefulWidget {
   const HeaderContainer({
     super.key,
+    required this.theme,
+    required this.location,
   });
-
+  final VoidCallback theme;
+  final VoidCallback location;
   @override
   State<HeaderContainer> createState() => _HeaderContainerState();
 }
@@ -37,7 +40,7 @@ class _HeaderContainerState extends State<HeaderContainer> {
     List<Placemark> placemark = await placemarkFromCoordinates(lat, long);
     Placemark place = placemark[0];
     setState(() {
-      locality = place.locality!;
+      locality = place.subLocality!;
       city = place.subAdministrativeArea ?? "Loading...";
     });
   }
@@ -52,44 +55,47 @@ class _HeaderContainerState extends State<HeaderContainer> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Row(
-                children: [
-                  Text(
-                    city,
-                    style: const TextStyle(
-                      fontSize: 19,
+          InkWell(
+            onTap: widget.location,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      city,
+                      style: const TextStyle(
+                        fontSize: 19,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 8,
+                    ),
+                    const Icon(
+                      Icons.location_on,
                       color: Colors.white,
-                      fontWeight: FontWeight.w600,
+                    ),
+                  ],
+                ),
+                if (locality != "")
+                  Text(
+                    locality,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w400,
                     ),
                   ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  const Icon(
-                    Icons.location_on,
-                    color: Colors.white,
-                  ),
-                ],
-              ),
-              if (locality != "")
-                Text(
-                  locality,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.white,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-            ],
+              ],
+            ),
           ),
           InkWell(
-            onTap: () {},
+            onTap: widget.theme,
             child: const Icon(
-              Icons.menu,
+              Icons.brightness_4_outlined,
               size: 28,
               color: Colors.white,
             ),

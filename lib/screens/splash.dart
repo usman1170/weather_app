@@ -93,7 +93,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         ),
                       ),
                       TextSpan(
-                        text: "SyncEX",
+                        text: "Ahtisham",
                         style: TextStyle(
                           fontSize: 18,
                           letterSpacing: .6,
