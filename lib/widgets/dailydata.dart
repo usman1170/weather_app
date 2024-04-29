@@ -7,8 +7,15 @@ class DailyDataForecast extends StatelessWidget {
   const DailyDataForecast({
     Key? key,
     required this.weatherDataDaily,
+    required this.ontap,
+    required this.color1,
+    required this.color2,
+    required this.color3,
   }) : super(key: key);
-
+  final VoidCallback ontap;
+  final Color color1;
+  final Color color2;
+  final Color color3;
   // string manipulation
   String getDay(final day) {
     DateTime time = DateTime.fromMillisecondsSinceEpoch(day * 1000);
@@ -35,12 +42,12 @@ class DailyDataForecast extends StatelessWidget {
             ),
           ],
         ),
-        dailyList(),
+        dailyList(ontap, color1, color2, color3),
       ],
     );
   }
 
-  Widget dailyList() {
+  Widget dailyList(VoidCallback ontap, Color color1, color2, color3) {
     return SizedBox(
       height: 450,
       child: ListView.builder(
@@ -55,52 +62,55 @@ class DailyDataForecast extends StatelessWidget {
               "${weatherDataDaily.daily[index].temp!.max! - 273}º C";
           final minTemp =
               "${weatherDataDaily.daily[index].temp!.min! - 273}º C";
-          return Container(
-            margin: const EdgeInsets.only(bottom: 8),
-            width: MediaQuery.of(context).size.width - 50,
-            height: 56,
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.white.withOpacity(.5),
-                    Colors.orangeAccent.shade100.withOpacity(.5),
-                    Colors.orangeAccent.shade200.withOpacity(.7),
-                  ]),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  getDay(weatherDataDaily.daily[index].dt),
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Colors.black54.withOpacity(.75),
-                    fontWeight: FontWeight.w600,
+          return InkWell(
+            onTap: ontap,
+            child: Container(
+              margin: const EdgeInsets.only(bottom: 8),
+              width: MediaQuery.of(context).size.width - 50,
+              height: 56,
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      color1,
+                      color2,
+                      color3,
+                    ]),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    getDay(weatherDataDaily.daily[index].dt),
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.black54.withOpacity(.75),
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 40,
-                  width: 40,
-                  child: Image.asset(icon),
-                ),
-                const SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "$maxTemp/$minTemp",
-                  style: const TextStyle(
-                    fontSize: 13,
-                    color: Colors.white,
+                  SizedBox(
+                    height: 40,
+                    width: 40,
+                    child: Image.asset(icon),
                   ),
-                ),
-                const SizedBox(
-                  height: 4,
-                ),
-              ],
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    "$maxTemp / $minTemp",
+                    style: const TextStyle(
+                      fontSize: 13,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                ],
+              ),
             ),
           );
         },

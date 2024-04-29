@@ -15,23 +15,17 @@ class Weather {
   String? main;
   String? description;
   String? icon;
-  int? sunrise;
-  int? sunset;
 
   Weather({
     this.id,
     this.main,
     this.description,
     this.icon,
-    this.sunrise,
-    this.sunset,
   });
 
   factory Weather.fromJson(Map<String, dynamic> json) => Weather(
         id: json['id'] as int?,
         main: json['main'] as String?,
-        sunrise: json["sunrise"] as int?,
-        sunset: json["sunset"] as int?,
         description: json['description'] as String?,
         icon: json['icon'] as String?,
       );
@@ -39,8 +33,6 @@ class Weather {
   Map<String, dynamic> toJson() => {
         "id": id,
         "main": main,
-        "sunrise": sunrise,
-        "sunset": sunset,
         "description": description,
         "icon": icon,
       };
@@ -55,6 +47,8 @@ class Current {
   double? clouds;
   double? visibility;
   double? windSpeed;
+  int? sunrise;
+  int? sunset;
   List<Weather>? weather;
 
   Current({
@@ -66,12 +60,16 @@ class Current {
     this.clouds,
     this.visibility,
     this.windSpeed,
+    this.sunrise,
+    this.sunset,
     this.weather,
   });
 
   factory Current.fromJson(Map<String, dynamic> json) => Current(
         temp: (json["temp"] as num?)?.round(),
         feelsLike: (json["feels_like"] as num?)?.round(),
+        sunrise: json["sunrise"] as int?,
+        sunset: json["sunset"] as int?,
         pressure: double.tryParse(json['pressure'].toString()),
         humidity: double.tryParse(json['humidity'].toString()),
         uvi: double.tryParse(json['uvi'].toString()),
@@ -88,6 +86,8 @@ class Current {
         'feels_like': feelsLike,
         'pressure': pressure,
         'humidity': humidity,
+        "sunrise": sunrise,
+        "sunset": sunset,
         "uvi": uvi,
         'clouds': clouds,
         'visibility': visibility,

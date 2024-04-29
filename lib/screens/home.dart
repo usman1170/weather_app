@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:weather_app/controller/global_controllar.dart';
+import 'package:weather_app/screens/map_page.dart';
+import 'package:weather_app/utils/constants.dart';
 import 'package:weather_app/widgets/comfortlevel.dart';
 import 'package:weather_app/widgets/dailydata.dart';
 import '../widgets/hourlydata.dart';
@@ -19,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     GlobalController(),
     permanent: true,
   );
-
+  bool darkTheme = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,8 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft,
                     colors: [
-                      Colors.blue.shade300,
-                      Colors.blue.shade400,
+                      lightColor.shade300,
+                      lightColor.shade400,
                     ],
                   ),
                 ),
@@ -75,8 +77,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft,
                     colors: [
-                      Colors.blue.shade300,
-                      Colors.blue.shade400,
+                      darkTheme ? darkColor.shade800 : lightColor.shade300,
+                      darkTheme ? darkColor.shade800 : lightColor.shade400,
                     ],
                   ),
                 ),
@@ -96,8 +98,18 @@ class _HomeScreenState extends State<HomeScreen> {
                           // Header container
                           //
                           HeaderContainer(
-                            theme: () {},
-                            location: () {},
+                            theme: () {
+                              setState(() {
+                                darkTheme = !darkTheme;
+                              });
+                            },
+                            location: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const MapPage(),
+                                  ));
+                            },
                           ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * .014,
@@ -124,6 +136,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                     currentWeatherData: _globalController
                                         .getWeatherValues()
                                         .getCurrentWeatherData(),
+                                    color1: darkTheme
+                                        ? Colors.teal.shade300
+                                        : Colors.orange.shade200
+                                            .withOpacity(.8),
+                                    color2: darkTheme
+                                        ? Colors.teal.shade500
+                                        : Colors.orange.shade400
+                                            .withOpacity(.75),
                                   ),
                                   SizedBox(
                                     height: MediaQuery.of(context).size.height *
@@ -136,6 +156,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                     currentWeatherData: _globalController
                                         .getWeatherValues()
                                         .getCurrentWeatherData(),
+                                    color: darkTheme
+                                        ? Colors.teal.shade100
+                                        : Colors.orange.shade200
+                                            .withOpacity(.7),
                                   ),
                                 ],
                               )
@@ -150,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Padding(
                                 padding: EdgeInsets.only(left: 8),
                                 child: Text(
-                                  "Today :",
+                                  "Next Hours :",
                                   style: TextStyle(
                                     fontSize: 14,
                                     color: Colors.white,
@@ -158,17 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding: EdgeInsets.only(right: 20),
-                                child: Text(
-                                  "View details",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
+                              SizedBox()
                             ],
                           ),
                           SizedBox(
@@ -186,6 +200,16 @@ class _HomeScreenState extends State<HomeScreen> {
                             weatherDataDaily: _globalController
                                 .getWeatherValues()
                                 .getdailyWeatherData(),
+                            ontap: () {},
+                            color1: darkTheme
+                                ? Colors.teal.shade200.withOpacity(.6)
+                                : Colors.orangeAccent.shade100.withOpacity(.3),
+                            color2: darkTheme
+                                ? Colors.teal.shade300.withOpacity(.8)
+                                : Colors.orangeAccent.shade200.withOpacity(.5),
+                            color3: darkTheme
+                                ? Colors.teal.shade500
+                                : Colors.orange.shade400.withOpacity(.6),
                           ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * .015,

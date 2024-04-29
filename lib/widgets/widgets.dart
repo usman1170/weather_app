@@ -108,9 +108,13 @@ class _HeaderContainerState extends State<HeaderContainer> {
 
 class RowUpperContainer extends StatelessWidget {
   final CurrentWeatherData currentWeatherData;
+  final Color color1;
+  final Color color2;
   const RowUpperContainer({
     super.key,
     required this.currentWeatherData,
+    required this.color1,
+    required this.color2,
   });
 
   @override
@@ -127,8 +131,8 @@ class RowUpperContainer extends StatelessWidget {
             end: Alignment.bottomCenter,
             colors: [
               Colors.white.withOpacity(.5),
-              Colors.orangeAccent.shade100.withOpacity(.65),
-              Colors.orangeAccent.shade400.withOpacity(.7),
+              color1,
+              color2,
             ]),
         borderRadius: const BorderRadius.all(
           Radius.circular(20),
@@ -185,9 +189,11 @@ class RowUpperContainer extends StatelessWidget {
 
 class RowLowerContainer extends StatelessWidget {
   final CurrentWeatherData currentWeatherData;
+  final Color color;
   const RowLowerContainer({
     super.key,
     required this.currentWeatherData,
+    required this.color,
   });
 
   @override
@@ -230,7 +236,7 @@ class RowLowerContainer extends StatelessWidget {
                     "${currentWeatherData.current.feelsLike! - 273} °C",
                     style: TextStyle(
                       fontSize: 30,
-                      color: Colors.orange.shade100,
+                      color: color,
                       fontWeight: FontWeight.w600,
                     ),
                   ),

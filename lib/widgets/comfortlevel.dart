@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:weather_app/models/current_weather_data.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 
@@ -8,6 +9,12 @@ class ComfortLevel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String getTime(final time) {
+      DateTime datetime = DateTime.fromMillisecondsSinceEpoch(time * 1000);
+      String x = DateFormat("jm").format(datetime);
+      return x;
+    }
+
     return Column(
       children: [
         Container(
@@ -38,28 +45,30 @@ class ComfortLevel extends StatelessWidget {
                   max: 100,
                   initialValue: currentWeatherData.current.humidity!.toDouble(),
                   appearance: CircularSliderAppearance(
-                      animationEnabled: true,
-                      customWidths: CustomSliderWidths(
-                        trackWidth: 8,
-                        progressBarWidth: 14,
+                    animationEnabled: true,
+                    customWidths: CustomSliderWidths(
+                      trackWidth: 8,
+                      progressBarWidth: 14,
+                    ),
+                    infoProperties: InfoProperties(
+                      bottomLabelStyle: const TextStyle(
+                        fontSize: 15,
+                        color: Colors.white,
+                        letterSpacing: .4,
                       ),
-                      infoProperties: InfoProperties(
-                        bottomLabelStyle: const TextStyle(
-                          fontSize: 15,
-                          color: Colors.white,
-                          letterSpacing: .4,
-                        ),
-                        bottomLabelText: "Humidity",
-                      ),
-                      size: 160,
-                      customColors: CustomSliderColors(
-                          trackColor: Colors.purple.shade100,
-                          progressBarColors: [
-                            Colors.purple.shade300,
-                            Colors.purpleAccent.shade200,
-                            Colors.blue,
-                            Colors.blueAccent.shade700,
-                          ])),
+                      bottomLabelText: "Humidity",
+                    ),
+                    size: 160,
+                    customColors: CustomSliderColors(
+                      trackColor: Colors.purple.shade100,
+                      progressBarColors: [
+                        Colors.purple.shade300,
+                        Colors.purpleAccent.shade200,
+                        Colors.blue,
+                        Colors.blueAccent.shade700,
+                      ],
+                    ),
+                  ),
                 ),
               ),
               Row(
@@ -67,24 +76,54 @@ class ComfortLevel extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 8),
-                    child: Text(
-                      "Feels Like : ${currentWeatherData.current.feelsLike! - 273} °C",
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                      ),
+                    child: Column(
+                      children: [
+                        Text(
+                          "Feels Like : ${currentWeatherData.current.feelsLike! - 273} °C",
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                          "Sun Rise : ${getTime(currentWeatherData.current.sunrise)}",
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(right: 14),
-                    child: Text(
-                      "UV index : ${currentWeatherData.current.uvi}",
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                      ),
+                    child: Column(
+                      children: [
+                        Text(
+                          "UV index : ${currentWeatherData.current.uvi}",
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                          "Sun Set : ${getTime(currentWeatherData.current.sunset)}",
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
