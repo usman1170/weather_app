@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:weather_app/controller/global_controllar.dart';
-import 'package:weather_app/screens/map_page.dart';
 import 'package:weather_app/utils/constants.dart';
 import 'package:weather_app/widgets/comfortlevel.dart';
 import 'package:weather_app/widgets/dailydata.dart';
@@ -102,13 +101,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               setState(() {
                                 darkTheme = !darkTheme;
                               });
-                            },
-                            location: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const MapPage(),
-                                  ));
                             },
                           ),
                           SizedBox(

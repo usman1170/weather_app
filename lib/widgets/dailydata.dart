@@ -51,6 +51,7 @@ class DailyDataForecast extends StatelessWidget {
     return SizedBox(
       height: 450,
       child: ListView.builder(
+        physics: const NeverScrollableScrollPhysics(),
         scrollDirection: Axis.vertical,
         itemCount: weatherDataDaily.daily.length > 7
             ? 7

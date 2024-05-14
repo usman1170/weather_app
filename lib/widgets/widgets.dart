@@ -11,10 +11,8 @@ class HeaderContainer extends StatefulWidget {
   const HeaderContainer({
     super.key,
     required this.theme,
-    required this.location,
   });
   final VoidCallback theme;
-  final VoidCallback location;
   @override
   State<HeaderContainer> createState() => _HeaderContainerState();
 }
@@ -55,42 +53,39 @@ class _HeaderContainerState extends State<HeaderContainer> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          InkWell(
-            onTap: widget.location,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      city,
-                      style: const TextStyle(
-                        fontSize: 19,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 8,
-                    ),
-                    const Icon(
-                      Icons.location_on,
-                      color: Colors.white,
-                    ),
-                  ],
-                ),
-                if (locality != "")
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Row(
+                children: [
                   Text(
-                    locality,
+                    city,
                     style: const TextStyle(
-                      fontSize: 14,
+                      fontSize: 19,
                       color: Colors.white,
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
-              ],
-            ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  const Icon(
+                    Icons.location_on,
+                    color: Colors.white,
+                  ),
+                ],
+              ),
+              if (locality != "")
+                Text(
+                  locality,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+            ],
           ),
           InkWell(
             onTap: widget.theme,
