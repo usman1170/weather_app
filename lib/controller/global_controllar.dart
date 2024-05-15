@@ -3,8 +3,7 @@ import 'package:get/get.dart';
 import 'package:weather_app/controller/fetch_weatherdata.dart';
 import 'package:weather_app/models/weather_data.dart';
 
-const apiKey = "43d16083365db7948c86cb2601d5049c";
-const newKey = "066300b3cf92c1fec10cd7462e7a42ff";
+const newKey = "";
 
 class GlobalController extends GetxController {
   final RxBool _isLoading = true.obs;

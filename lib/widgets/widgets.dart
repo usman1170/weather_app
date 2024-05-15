@@ -40,6 +40,7 @@ class _HeaderContainerState extends State<HeaderContainer> {
     setState(() {
       locality = place.subLocality!;
       city = place.subAdministrativeArea ?? "Loading...";
+      print("sub == ${place.subLocality}");
     });
   }
 
