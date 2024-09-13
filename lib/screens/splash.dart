@@ -55,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   height: 18,
                 ),
                 const Text(
-                  "Weather App",
+                  "Accu Weather",
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.white,
@@ -93,7 +93,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         ),
                       ),
                       TextSpan(
-                        text: "Ahtisham",
+                        text: "SyncEX",
                         style: TextStyle(
                           fontSize: 18,
                           letterSpacing: .6,

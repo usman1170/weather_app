@@ -1,11 +1,10 @@
 import 'dart:convert';
-
-import 'package:weather_app/controller/global_controllar.dart';
 import 'package:weather_app/models/current_weather_data.dart';
 import 'package:weather_app/models/daily_weather_data.dart';
 import 'package:weather_app/models/hourly_weather_data.dart';
 import 'package:weather_app/models/weather_data.dart';
 import 'package:http/http.dart' as http;
+import 'package:weather_app/utils/secrets.dart';
 
 class FetchWeather {
   WeatherData? weatherData;
@@ -29,6 +28,6 @@ class FetchWeather {
 String apiUrl(var lat, var lon) {
   String url;
   url =
-      "https://api.openweathermap.org/data/3.0/onecall?lat=$lat&lon=$lon&appid=$newKey&units=matric&exclude=minutely";
+      "https://api.openweathermap.org/data/3.0/onecall?lat=$lat&lon=$lon&appid=$apiKey&units=matric&exclude=minutely";
   return url;
 }

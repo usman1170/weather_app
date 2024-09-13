@@ -292,11 +292,15 @@ class MainLongContainer extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text(
-                date,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 13,
+              SizedBox(
+                width: MediaQuery.of(context).size.width * .25,
+                child: Text(
+                  date,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 13,
+                  ),
                 ),
               ),
               SizedBox(
